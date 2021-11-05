@@ -1,4 +1,15 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Body, Post } from '@nestjs/common';
+import { User } from '@prisma/client';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UsersService } from './users.service';
+import { UserRole } from './enum/role.enum';
 
-@Controller('users')
-export class UsersController {}
+@Controller()
+export class UsersController {
+  constructor(private service: UsersService) {}
+
+  @Post('create')
+  create(@Body() data: CreateUserDto): Promise<User> {
+    return this.service.create(data, UserRole.USER);
+  }
+}
