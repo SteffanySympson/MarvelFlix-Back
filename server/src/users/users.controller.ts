@@ -10,6 +10,7 @@ export class UsersController {
 
   @Post('create')
   create(@Body() data: CreateUserDto): Promise<User> {
+    delete data.passwordConfirmation;
     return this.service.create(data, UserRole.USER);
   }
 }
