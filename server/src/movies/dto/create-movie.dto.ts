@@ -3,5 +3,5 @@ export class CreateMovieDto {
   year: Date;
   length: Date;
   storyline: string;
-  iamge: string;
+  image: string;
 }
