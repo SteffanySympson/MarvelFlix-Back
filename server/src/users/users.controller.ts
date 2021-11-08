@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   UnprocessableEntityException,
+  Delete,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -35,5 +36,10 @@ export class UsersController {
   @Get('find-many')
   findMany() {
     return this.service.findMany();
+  }
+
+  @Delete('delete/:id')
+  deleteOne(@Param('id') id: string): Promise<{ message: string }> {
+    return this.service.deleteOne(id);
   }
 }
