@@ -23,7 +23,8 @@ export class UsersService {
       );
     }
 
-    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const salt = 10;
+    const hashedPassword = await bcrypt.hash(data.password, salt);
 
     const user = await this.db.user.create({
       data: {
