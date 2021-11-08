@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { UserRole } from './enum/role.enum';
@@ -31,5 +35,25 @@ export class UsersService {
 
     delete user.password;
     return user;
+  }
+
+  async findOne(id: string): Promise<User> {
+    const user = await this.db.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(
+        'Id não encontrado em nosso DB, esse usuário pode não existir!',
+      );
+    }
+    delete user.password;
+    return user;
+  }
+
+  async findMany() {
+    const user = await this.db.user.findMany();
+    const newUser = user.map(({ password, ...resto }) => resto);
+    return newUser;
   }
 }

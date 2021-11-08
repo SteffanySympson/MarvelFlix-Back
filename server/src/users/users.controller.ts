@@ -1,4 +1,11 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import {
+  Controller,
+  Body,
+  Post,
+  Get,
+  Param,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { User } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
@@ -18,5 +25,15 @@ export class UsersController {
   createAdmin(@Body() data: CreateUserDto): Promise<User> {
     delete data.passwordConfirmation;
     return this.service.create(data, UserRole.ADMIN);
+  }
+
+  @Get('find/:id')
+  findOne(@Param('id') id: string): Promise<User> {
+    return this.service.findOne(id);
+  }
+
+  @Get('find-many')
+  findMany() {
+    return this.service.findMany();
   }
 }
