@@ -10,4 +10,9 @@ export class MoviesService {
     const movie = await this.db.movie.create({ data });
     return movie;
   }
+
+  async findMany(): Promise<Movie[]> {
+    const movies = await this.db.movie.findMany();
+    return movies;
+  }
 }
