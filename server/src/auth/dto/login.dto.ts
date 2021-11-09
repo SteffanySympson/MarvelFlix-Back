@@ -1,4 +1,5 @@
 import { IsString, IsEmail, MinLength, MaxLength } from 'class-validator';
+import { User } from '@prisma/client';
 
 export class LoginDto {
   @IsEmail()
@@ -8,4 +9,9 @@ export class LoginDto {
   @MinLength(3)
   @MaxLength(30)
   password: string;
+}
+
+export class AuthResponse {
+  token: string;
+  user: User;
 }
