@@ -21,10 +21,10 @@ export class CreateUserDto {
   email: string;
 
   @IsString({ message: 'Informe uma senha entre 6 e 30 caracteres.' })
-  @Length(6, 30)
+  @Length(3, 30)
   password: string;
 
   @IsString({ message: 'Confirme sua senha.' })
-  @Length(6, 30)
+  @Length(3, 30)
   passwordConfirmation: string;
 }
