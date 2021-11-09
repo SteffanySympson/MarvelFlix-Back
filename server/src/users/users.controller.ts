@@ -36,13 +36,13 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard())
-  @Get('find/:id')
+  @Get('catch/:id')
   findOne(@Param('id') id: string): Promise<User> {
     return this.service.findOne(id);
   }
 
   @UseGuards(AuthGuard())
-  @Get('find-many')
+  @Get('catch-all')
   findMany() {
     return this.service.findMany();
   }
