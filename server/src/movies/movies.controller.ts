@@ -27,14 +27,14 @@ export class MoviesController {
     return this.service.create(data);
   }
 
-  @UseGuards(AuthGuard())
   @Get('catch-all')
+  @UseGuards(AuthGuard())
   finMany(): Promise<Movie[]> {
     return this.service.findMany();
   }
 
-  @UseGuards(AuthGuard())
   @Get('catch/:id')
+  @UseGuards(AuthGuard())
   findOne(@Param('id') id: string): Promise<Movie> {
     return this.service.findOne(id);
   }
