@@ -33,16 +33,16 @@ export class UsersController {
     return this.service.create(data, UserRole.ADMIN);
   }
 
-  @Get('catch/:id')
-  @UseGuards(AuthGuard())
-  findOne(@Param('id') id: string): Promise<User> {
-    return this.service.findOne(id);
-  }
-
   @Get('catch-all')
   @UseGuards(AuthGuard())
   findMany() {
     return this.service.findMany();
+  }
+
+  @Get('catch/:id')
+  @UseGuards(AuthGuard())
+  findOne(@Param('id') id: string): Promise<User> {
+    return this.service.findOne(id);
   }
 
   @Delete('delete/:id')

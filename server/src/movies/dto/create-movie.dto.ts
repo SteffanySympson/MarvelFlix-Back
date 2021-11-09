@@ -5,10 +5,10 @@ export class CreateMovieDto {
   name: string;
 
   @IsString()
-  year: Date;
+  year: string;
 
   @IsString()
-  length: Date;
+  length: string;
 
   @IsNotEmpty()
   storyline: string;

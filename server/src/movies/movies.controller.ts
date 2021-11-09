@@ -16,6 +16,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { User } from '@prisma/client';
 import AuthUser from 'src/auth/auth-user.decorator';
 import { UserRole } from 'src/users/enum/role.enum';
+
 @Controller('movies')
 export class MoviesController {
   constructor(private service: MoviesService) {}
@@ -44,5 +45,15 @@ export class MoviesController {
   @UseGuards(AuthGuard(), RolesGuard)
   deleteOne(@Param('id') id: string): Promise<{ message: string }> {
     return this.service.deleteOne(id);
+  }
+
+  @Get('like/:id')
+  @UseGuards(AuthGuard())
+  likeMovie(
+    @AuthUser() user: User,
+    @Param('id') movieId: string,
+  ): Promise<User> {
+    const userId = user.id;
+    return this.service.likeMovie(userId, movieId);
   }
 }
