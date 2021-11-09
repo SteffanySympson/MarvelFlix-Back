@@ -4,7 +4,10 @@ export class CreateMovieDto {
   @IsString()
   name: string;
 
+  @IsString()
   year: Date;
+
+  @IsString()
   length: Date;
 
   @IsNotEmpty()

@@ -11,8 +11,8 @@ export class MoviesController {
     return this.service.create(data);
   }
 
-  @Get('find-many')
-  findMany(): Promise<Movie[]> {
+  @Get('catch-all')
+  finMany(): Promise<Movie[]> {
     return this.service.findMany();
   }
 
