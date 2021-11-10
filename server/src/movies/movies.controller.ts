@@ -3,12 +3,14 @@ import {
   Body,
   Post,
   Get,
+  Put,
   Param,
   Delete,
   UseGuards,
 } from '@nestjs/common';
 import { Movie } from '@prisma/client';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/updated-movies.dto';
 import { MoviesService } from './movies.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from 'src/auth/role.decorator';
@@ -55,5 +57,18 @@ export class MoviesController {
   ): Promise<User> {
     const userId = user.id;
     return this.service.likeMovie(userId, movieId);
+  }
+
+  @Put('update/:id')
+  async updateMovie(
+    @Param('id') id: string,
+    @Body('data') data: UpdateMovieDto,
+  ): Promise<Movie> {
+    return this.service.updateMovie(
+      {
+        where: { id: id },
+      },
+      data,
+    );
   }
 }

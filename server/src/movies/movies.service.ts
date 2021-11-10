@@ -58,4 +58,21 @@ export class MoviesService {
       },
     });
   }
+
+  async updateMovie(
+    params: {
+      where: Prisma.MovieWhereUniqueInput;
+    },
+    data: Prisma.MovieUpdateInput,
+  ): Promise<Movie> {
+    const { where } = params;
+    return this.db.movie.update({
+      where: {
+        ...where,
+      },
+      data: {
+        ...data,
+      },
+    });
+  }
 }
